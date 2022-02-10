@@ -1,10 +1,5 @@
 export default class Validator {
-  constructor(username, mobile) {
-    this.username = this.validateUsername(username);
-    this.mobileNumber = this.validateMobile(mobile);
-  }
-
-  validateUsername(username) {
+  static validateUsername(username) {
     if (
       /^[^\d-_][\w-]+[^\d-_]$/.test(username) && !/\d{4,}/.test(username)) {
       return username;
@@ -14,7 +9,7 @@ export default class Validator {
       - The name must not contain more than three digits in a row, or begin or end with numbers, underscores, or dashes.`);
   }
 
-  validateMobile(mobile) {
+  static validateMobile(mobile) {
     const number = mobile.replace(/[\s\-()]/g, '');
 
     if (number.length > 13 || number.length < 11) {

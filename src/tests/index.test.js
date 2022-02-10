@@ -1,38 +1,28 @@
 import Validator from '../index';
 
-test('Validator should return correctly validate username and mobile number', () => {
-  const user1 = new Validator('nero_99rus', '8 (927) 000-00-00');
-  const user2 = new Validator('dante999-999jj', '+7 960 000 00 00');
-  const user3 = new Validator('n9n9_9n', '86 000 000 0000');
-  const user4 = new Validator('rus178rus', '+86 000 000 0000');
-
-  expect(user1).toEqual({
-    username: 'nero_99rus',
-    mobileNumber: '+79270000000',
+describe('Validator should return: ', () => {
+  test('correctly validated username', () => {
+    expect(Validator.validateUsername('nero_99rus')).toEqual('nero_99rus');
+    expect(Validator.validateUsername('dante999-999jj')).toEqual('dante999-999jj');
+    expect(Validator.validateUsername('n9n9_9n')).toEqual('n9n9_9n');
   });
 
-  expect(user2).toEqual({
-    username: 'dante999-999jj',
-    mobileNumber: '+79600000000',
-  });
-
-  expect(user3).toEqual({
-    username: 'n9n9_9n',
-    mobileNumber: '+860000000000',
-  });
-
-  expect(user4).toEqual({
-    username: 'rus178rus',
-    mobileNumber: '+860000000000',
+  test('correctly validated mobile number', () => {
+    expect(Validator.validateMobile('8 (927) 000-00-00')).toEqual('+79270000000');
+    expect(Validator.validateMobile('+7 960 000 00 00')).toEqual('+79600000000');
+    expect(Validator.validateMobile('86 000 000 0000')).toEqual('+860000000000');
+    expect(Validator.validateMobile('+86 000 000 0000')).toEqual('+860000000000');
   });
 });
 
-test('validateUsername should throw an error, if an invalid username is passed', () => {
-  expect(() => new Validator('nero1111nero', '+79999999999')).toThrow(Error);
-  expect(() => new Validator('_-nero999', '+79999999999')).toThrow(Error);
-  expect(() => new Validator('nero99 nero', '+79999999999')).toThrow(Error);
-});
+describe('Validator should throw error: ', () => {
+  test('if an invalid username was entered', () => {
+    expect(() => Validator.validateUsername('nero1111nero')).toThrow(Error);
+    expect(() => Validator.validateUsername('_-nero999')).toThrow(Error);
+    expect(() => Validator.validateUsername('nero99 nero')).toThrow(Error);
+  });
 
-test('validateMobile should throw an error, if an invalid mobile is passed', () => {
-  expect(() => new Validator('bob', '88 999 999 999 999 88')).toThrow(Error);
+  test('if an invalid number was entered', () => {
+    expect(() => Validator.validateMobile('88 999 999 999 999 88')).toThrow(Error);
+  });
 });
