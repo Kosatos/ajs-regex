@@ -2,7 +2,7 @@ export default class Validator {
   static validateUsername(username) {
     if (
       /^[^\d-_][\w-]+[^\d-_]$/.test(username) && !/\d{4,}/.test(username)) {
-      return username;
+      return { success: true};
     }
     throw new Error(`
       - Only Latin letters, dashes, underscores _ and numbers (0-9) are allowed.
@@ -12,7 +12,7 @@ export default class Validator {
   static validateMobile(mobile) {
     const number = mobile.replace(/[\s\-()]/g, '');
 
-    if (number.length > 13 || number.length < 11) {
+    if (number.length > 15 || number.length < 11) {
       throw new Error(`An invalid number ${mobile} was entered`);
     }
 
