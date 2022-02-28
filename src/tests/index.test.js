@@ -2,9 +2,9 @@ import Validator from '../index';
 
 describe('Validator should return: ', () => {
   test('correctly validated username', () => {
-    expect(Validator.validateUsername('nero_99rus')).toEqual({"success": true});
-    expect(Validator.validateUsername('dante999-999jj')).toEqual({"success": true});
-    expect(Validator.validateUsername('n9n9_9n')).toEqual({"success": true});
+    expect(Validator.validateUsername('nero_99rus')).toEqual({ success: true });
+    expect(Validator.validateUsername('dante999-999jj')).toEqual({ success: true });
+    expect(Validator.validateUsername('n9n9_9n')).toEqual({ success: true });
   });
 
   test('correctly validated mobile number', () => {

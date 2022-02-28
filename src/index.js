@@ -2,7 +2,7 @@ export default class Validator {
   static validateUsername(username) {
     if (
       /^[^\d-_][\w-]+[^\d-_]$/.test(username) && !/\d{4,}/.test(username)) {
-      return { success: true};
+      return { success: true };
     }
     throw new Error(`
       - Only Latin letters, dashes, underscores _ and numbers (0-9) are allowed.
